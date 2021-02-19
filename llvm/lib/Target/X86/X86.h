@@ -129,6 +129,11 @@ FunctionPass *createX86DiscriminateMemOpsPass();
 /// This pass applies profiling information to insert cache prefetches.
 FunctionPass *createX86InsertPrefetchPass();
 
+/// This pass contains SORA instrumentation except the modification of function prologues and epilogues
+/// For function prologues and epilogues see X86FrameLowering.cpp
+FunctionPass *createX86SORAPass();
+
+
 InstructionSelector *createX86InstructionSelector(const X86TargetMachine &TM,
                                                   X86Subtarget &,
                                                   X86RegisterBankInfo &);
@@ -150,6 +155,8 @@ void initializeX86ExpandPseudoPass(PassRegistry &);
 void initializeX86FlagsCopyLoweringPassPass(PassRegistry &);
 void initializeX86OptimizeLEAPassPass(PassRegistry &);
 void initializeX86SpeculativeLoadHardeningPassPass(PassRegistry &);
+void initializeX86SORAPass(PassRegistry &);
+
 
 namespace X86AS {
 enum : unsigned {

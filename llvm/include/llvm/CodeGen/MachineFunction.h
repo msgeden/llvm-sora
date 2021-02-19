@@ -293,6 +293,14 @@ class MachineFunction {
   /// True if any WinCFI instruction have been emitted in this function.
   bool HasWinCFI = false;
 
+  //Added for SORA
+  /// True if any the function should have register spill protections checks.
+  bool HasSORA = true;
+    
+  //Added for SORA
+  /// Returns the number of (128-bi)t MAC blocks covering GPRs, Base Pointer and Return Address, Message Length
+  unsigned NumberOfMACBlocks=0;
+    
   /// Current high-level properties of the IR of the function (e.g. is in SSA
   /// form or whether registers have been allocated)
   MachineFunctionProperties Properties;
@@ -553,6 +561,22 @@ public:
   }
   void setHasWinCFI(bool v) { HasWinCFI = v; }
 
+  //Added for SORA
+  bool hasSORA() const {
+    return HasSORA;
+  }
+  void setHasSORA() {
+    if (getName()=="main"){
+      HasSORA=false;
+      return;
+    }
+  }
+  //Added for SORA
+  unsigned getNumberOfMACBlocks() const {
+    return NumberOfMACBlocks;
+  }
+  void setNumberOfMACBlocks(unsigned BlockSize) { NumberOfMACBlocks=BlockSize; }
+    
   /// True if this function needs frame moves for debug or exceptions.
   bool needsFrameMoves() const;
 

@@ -219,6 +219,14 @@ private:
   void emitCatchRetReturnValue(MachineBasicBlock &MBB,
                                MachineBasicBlock::iterator MBBI,
                                MachineInstr *CatchRet) const;
+  
+  // Added for SORA
+  /// Emits AES128 encryption round by assuming round keys are stored on XMM4-XMM15 registers
+  void emitAES128EncryptionRounds(MachineBasicBlock &MBB,
+                                     MachineBasicBlock::iterator MBBI,
+                                     const DebugLoc &DL,
+                                     Register IVector, Register Message) const;
+
 };
 
 } // End llvm namespace

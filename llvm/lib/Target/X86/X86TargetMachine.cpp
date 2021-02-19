@@ -542,6 +542,10 @@ void X86PassConfig::addPreEmitPass2() {
   // Identify valid longjmp targets for Windows Control Flow Guard.
   if (TT.isOSWindows())
     addPass(createCFGuardLongjmpPass());
+    
+  //Added for SORA
+  addPass(createX86SORAPass());
+    
 }
 
 std::unique_ptr<CSEConfigBase> X86PassConfig::getCSEConfig() const {
