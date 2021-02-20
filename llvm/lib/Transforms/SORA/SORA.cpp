@@ -45,7 +45,10 @@ public:
     std::ofstream file;
     SORAVariableCounter() : ModulePass(ID) {}
     bool runOnModule(Module &M) override {
-        file.open(getHomePath()+"/LLVM/variablecount.tsv");
+        std::string ModuleStr=M.getName().str();
+        std::size_t LastIndex=ModuleStr.rfind("/");
+        std::string FilePath=getHomePath()+"/LLVM/Files/count" + ModuleStr.substr(LastIndex+1) +".tsv";
+        file.open(FilePath);
         outs() << "Stats for" << M.getName() << "\n";
         file << "Stats for" << M.getName().str() << "\n";
         outs() << "Function" << "\t" << "Variable" << "\t" << "Address" << "\t" << "Argument" << "\n";
