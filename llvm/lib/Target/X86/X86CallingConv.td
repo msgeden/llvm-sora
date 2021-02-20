@@ -1094,8 +1094,10 @@ def CSR_64_CXX_TLS_Darwin_PE : CalleeSavedRegs<(add RBP)>;
 def CSR_64_CXX_TLS_Darwin_ViaCopy : CalleeSavedRegs<(sub CSR_64_TLS_Darwin, RBP)>;
 
 // All GPRs - except r11
-def CSR_64_RT_MostRegs : CalleeSavedRegs<(add CSR_64, RAX, RCX, RDX, RSI, RDI,
-                                              R8, R9, R10, RSP)>;
+def CSR_64_RT_MostRegs : CalleeSavedRegs<(add CSR_64, RAX, RCX, RDX, RSI, RDI, R8, R9, R10, RSP)>;
+
+//Modified for SORA
+//def CSR_64_RT_MostRegs : CalleeSavedRegs<(add RBX, RCX, RDX,                                              R8, R9, R10, R12, R13, R14, R15, RBP, RSP)>;
 
 // All registers - except r11
 def CSR_64_RT_AllRegs     : CalleeSavedRegs<(add CSR_64_RT_MostRegs,
@@ -1164,6 +1166,8 @@ def CSR_Win64_RegCall       : CalleeSavedRegs<(add CSR_Win64_RegCall_NoSSE,
                                               (sequence "XMM%u", 8, 15))>;
 def CSR_SysV64_RegCall_NoSSE : CalleeSavedRegs<(add RBX, RBP, RSP,
                                                (sequence "R%u", 12, 15))>;
-def CSR_SysV64_RegCall       : CalleeSavedRegs<(add CSR_SysV64_RegCall_NoSSE,               
-                                               (sequence "XMM%u", 8, 15))>;
+
+
+//def CSR_SysV64_RegCall       : CalleeSavedRegs<(add CSR_SysV64_RegCall_NoSSE,                                                    (sequence "XMM%u", 8, 15))>;
                                                
+def CSR_SysV64_RegCall       : CalleeSavedRegs<(add RBX, RBP, RSP, RBX, RCX, RDX, R8, R9, R10, R12, R13, R14, R15, (sequence "XMM%u", 0, 1))>;
