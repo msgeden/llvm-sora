@@ -296,11 +296,11 @@ class MachineFunction {
   //Added for SORA
   /// True if any the function should have register spill protections checks.
   bool HasSORA = true;
-    
+
   //Added for SORA
   /// Returns the number of (128-bi)t MAC blocks covering GPRs, Base Pointer and Return Address, Message Length
   unsigned NumberOfMACBlocks=0;
-    
+
   /// Current high-level properties of the IR of the function (e.g. is in SSA
   /// form or whether registers have been allocated)
   MachineFunctionProperties Properties;
@@ -565,18 +565,19 @@ public:
   bool hasSORA() const {
     return HasSORA;
   }
-  void setHasSORA() {
-    if (getName()=="main"){
-      HasSORA=false;
-      return;
-    }
+  void setHasSORA(bool v) {
+    //if (getName()=="main"){
+    //  HasSORA=false;
+    //  return;
+    //}
+    HasSORA=v;
   }
   //Added for SORA
   unsigned getNumberOfMACBlocks() const {
     return NumberOfMACBlocks;
   }
   void setNumberOfMACBlocks(unsigned BlockSize) { NumberOfMACBlocks=BlockSize; }
-    
+
   /// True if this function needs frame moves for debug or exceptions.
   bool needsFrameMoves() const;
 

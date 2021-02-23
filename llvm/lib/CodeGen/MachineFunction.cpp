@@ -203,9 +203,9 @@ void MachineFunction::init() {
   PSVManager =
     std::make_unique<PseudoSourceValueManager>(*(getSubtarget().
                                                   getInstrInfo()));
-   
+
   //Added for SORA
-  setHasSORA();
+  setHasSORA(true);
   //setNumberOfMACBlocks(0);
 }
 

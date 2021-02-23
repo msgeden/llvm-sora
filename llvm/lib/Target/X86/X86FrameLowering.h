@@ -92,6 +92,7 @@ public:
                                   const TargetRegisterInfo *TRI) const override;
 
   bool hasFP(const MachineFunction &MF) const override;
+  bool hasSORA(const MachineFunction &MF) const;
   bool hasReservedCallFrame(const MachineFunction &MF) const override;
   bool canSimplifyCallFramePseudos(const MachineFunction &MF) const override;
   bool needsFrameIndexResolution(const MachineFunction &MF) const override;
@@ -174,7 +175,7 @@ public:
   unsigned getInitialCFARegister(const MachineFunction &MF) const override;
 
   /// Return true if the function has a redzone (accessible bytes past the
-  /// frame of the top of stack function) as part of it's ABI.  
+  /// frame of the top of stack function) as part of it's ABI.
   bool has128ByteRedZone(const MachineFunction& MF) const;
 
 private:
@@ -219,7 +220,7 @@ private:
   void emitCatchRetReturnValue(MachineBasicBlock &MBB,
                                MachineBasicBlock::iterator MBBI,
                                MachineInstr *CatchRet) const;
-  
+
   // Added for SORA
   /// Emits AES128 encryption round by assuming round keys are stored on XMM4-XMM15 registers
   void emitAES128EncryptionRounds(MachineBasicBlock &MBB,
