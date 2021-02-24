@@ -3303,14 +3303,14 @@ static ArrayRef<MCPhysReg> get64BitArgumentGPRs(CallingConv::ID CallConv,
     return makeArrayRef(std::begin(GPR64ArgRegsWin64), std::end(GPR64ArgRegsWin64));
   }
   //Added for SORA
-  //static const MCPhysReg GPR64ArgRegs64Bit[] = {
-  //  X86::RDI, X86::RSI, X86::RDX, X86::RCX, X86::R8, X86::R9
-  //};
-  //return makeArrayRef(std::begin(GPR64ArgRegs64Bit), std::end(GPR64ArgRegs64Bit));
   static const MCPhysReg GPR64ArgRegs64Bit[] = {
-    X86::RDI, X86::RSI
+    X86::RDI, X86::RSI, X86::RDX, X86::RCX, X86::R8, X86::R9
   };
   return makeArrayRef(std::begin(GPR64ArgRegs64Bit), std::end(GPR64ArgRegs64Bit));
+  //static const MCPhysReg GPR64ArgRegs64Bit[] = {
+  //  X86::RDI, X86::RSI
+  //};
+  //return makeArrayRef(std::begin(GPR64ArgRegs64Bit), std::end(GPR64ArgRegs64Bit));
 }
 
 // FIXME: Get this from tablegen.

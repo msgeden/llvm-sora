@@ -162,9 +162,12 @@ struct OutgoingValueHandler : public CallLowering::ValueHandler {
     bool Res = AssignFn(ValNo, ValVT, LocVT, LocInfo, Flags, State);
     StackSize = State.getNextStackOffset();
 
-    static const MCPhysReg XMMArgRegs[] = {X86::XMM0, X86::XMM1, X86::XMM2,
-                                           X86::XMM3, X86::XMM4, X86::XMM5,
-                                           X86::XMM6, X86::XMM7};
+    //Added for SORA
+    //static const MCPhysReg XMMArgRegs[] = {X86::XMM0, X86::XMM1, X86::XMM2,
+    //                                         X86::XMM3, X86::XMM4, X86::XMM5,
+    //                                         X86::XMM6, X86::XMM7};
+      
+    static const MCPhysReg XMMArgRegs[] = {X86::XMM0, X86::XMM1};
     if (!Info.IsFixed)
       NumXMMRegs = State.getFirstUnallocated(XMMArgRegs);
 

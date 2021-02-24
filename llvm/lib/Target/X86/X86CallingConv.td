@@ -1168,6 +1168,7 @@ def CSR_SysV64_RegCall_NoSSE : CalleeSavedRegs<(add RBX, RBP, RSP,
                                                (sequence "R%u", 12, 15))>;
 
 
+//Modified for SORA
 //def CSR_SysV64_RegCall       : CalleeSavedRegs<(add CSR_SysV64_RegCall_NoSSE,                                                    (sequence "XMM%u", 8, 15))>;
 
-def CSR_SysV64_RegCall       : CalleeSavedRegs<(add RBX, RBP, RSP, RCX, RDX, R8, R9, R10, R12, R13, R14, R15, (sequence "XMM%u", 0, 1))>;
+def CSR_SysV64_RegCall       : CalleeSavedRegs<(add RBX, RBP, RSP, R12, R13, R14, R15)>;

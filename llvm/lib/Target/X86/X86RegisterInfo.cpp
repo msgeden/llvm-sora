@@ -546,10 +546,17 @@ BitVector X86RegisterInfo::getReservedRegs(const MachineFunction &MF) const {
       Reserved.set(SubReg);
   }
 
-  // Set the base register and its aliases as reserved if needed.
+  //Added for SORA
   if (TFI->hasSORA(MF)) {
     for (const MCPhysReg &SubReg : subregs_inclusive(X86::RBX))
       Reserved.set(SubReg);
+  }
+  //Added for SORA
+  if (Is64Bit) {
+       for (unsigned n = 4; n != 16; n++) {
+         for (MCRegAliasIterator AI(X86::XMM0 + n, this, true); AI.isValid(); ++AI)
+           Reserved.set(*AI);
+       }
   }
 
   // Set the base-pointer register and its aliases as reserved if needed.
@@ -611,13 +618,6 @@ BitVector X86RegisterInfo::getReservedRegs(const MachineFunction &MF) const {
   assert(checkAllSuperRegsMarked(Reserved,
                                  {X86::SIL, X86::DIL, X86::BPL, X86::SPL,
                                   X86::SIH, X86::DIH, X86::BPH, X86::SPH}));
-  //Added for SORA
-  if (Is64Bit) {
-     for (unsigned n = 4; n != 16; n++) {
-       for (MCRegAliasIterator AI(X86::XMM0 + n, this, true); AI.isValid(); ++AI)
-         Reserved.set(*AI);
-      }
-  }
   return Reserved;
 }
 
