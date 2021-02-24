@@ -3121,9 +3121,12 @@ bool X86FastISel::fastLowerArguments() {
   static const MCPhysReg GPR64ArgRegs[] = {
     X86::RDI, X86::RSI, X86::RDX, X86::RCX, X86::R8 , X86::R9
   };
+  //Added for SORA
+  //static const MCPhysReg XMMArgRegs[] = {
+  //    X86::XMM0, X86::XMM1, X86::XMM2, X86::XMM3,
+  //    X86::XMM4, X86::XMM5, X86::XMM6, X86::XMM7
   static const MCPhysReg XMMArgRegs[] = {
-    X86::XMM0, X86::XMM1, X86::XMM2, X86::XMM3,
-    X86::XMM4, X86::XMM5, X86::XMM6, X86::XMM7
+    X86::XMM0, X86::XMM1
   };
 
   unsigned GPRIdx = 0;
@@ -3458,9 +3461,13 @@ bool X86FastISel::fastLowerCall(CallLoweringInfo &CLI) {
     // registers used and is in the range 0 - 8 inclusive.
 
     // Count the number of XMM registers allocated.
+    //Added for SORA
+    //static const MCPhysReg XMMArgRegs[] = {
+    //  X86::XMM0, X86::XMM1, X86::XMM2, X86::XMM3,
+    //  X86::XMM4, X86::XMM5, X86::XMM6, X86::XMM7
+    //};
     static const MCPhysReg XMMArgRegs[] = {
-      X86::XMM0, X86::XMM1, X86::XMM2, X86::XMM3,
-      X86::XMM4, X86::XMM5, X86::XMM6, X86::XMM7
+      X86::XMM0, X86::XMM1
     };
     unsigned NumXMMRegs = CCInfo.getFirstUnallocated(XMMArgRegs);
     assert((Subtarget->hasSSE1() || !NumXMMRegs)
