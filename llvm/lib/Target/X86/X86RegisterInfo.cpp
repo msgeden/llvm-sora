@@ -552,8 +552,8 @@ BitVector X86RegisterInfo::getReservedRegs(const MachineFunction &MF) const {
          for (MCRegAliasIterator AI(X86::XMM0 + n, this, true); AI.isValid(); ++AI)
            Reserved.set(*AI);
        }
-       for (const MCPhysReg &SubReg : subregs_inclusive(X86::RBX))
-           Reserved.set(SubReg);
+       //for (const MCPhysReg &SubReg : subregs_inclusive(X86::RBX))
+       //    Reserved.set(SubReg);
   }
 
   // Set the base-pointer register and its aliases as reserved if needed.

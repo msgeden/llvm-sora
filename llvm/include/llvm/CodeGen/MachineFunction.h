@@ -295,8 +295,10 @@ class MachineFunction {
 
   //Added for SORA
   /// True if any the function should have register spill protections checks.
-  bool HasSORA = true;
+  bool HasSORA = false;
 
+  /// True if  the function has an inner call
+  bool HasCall = false;
   //Added for SORA
   /// Returns the number of (128-bi)t MAC blocks covering GPRs, Base Pointer and Return Address, Message Length
   unsigned NumberOfMACBlocks=0;
@@ -566,12 +568,17 @@ public:
     return HasSORA;
   }
   void setHasSORA(bool v) {
-    //if (getName()=="main"){
-    //  HasSORA=false;
-    //  return;
-    //}
     HasSORA=v;
   }
+  
+  //Added for SORA
+  bool hasCall() const {
+      return HasCall;
+  }
+  void setHasCall(bool v) {
+      HasCall=v;
+  }
+
   //Added for SORA
   unsigned getNumberOfMACBlocks() const {
     return NumberOfMACBlocks;

@@ -26,6 +26,7 @@
 #include "llvm/CodeGen/MachineBasicBlock.h"
 #include "llvm/CodeGen/MachineConstantPool.h"
 #include "llvm/CodeGen/MachineFrameInfo.h"
+#include "llvm/CodeGen/MachineBasicBlock.h"
 #include "llvm/CodeGen/MachineInstr.h"
 #include "llvm/CodeGen/MachineJumpTableInfo.h"
 #include "llvm/CodeGen/MachineMemOperand.h"
@@ -203,9 +204,14 @@ void MachineFunction::init() {
   PSVManager =
     std::make_unique<PseudoSourceValueManager>(*(getSubtarget().
                                                   getInstrInfo()));
-
+  
   //Added for SORA
-  setHasSORA(true);
+  for (const BasicBlock &BB:F)
+      for (const Instruction &Inst:BB)
+          if (isa<CallInst>(Inst))
+              setHasCall(true);
+    
+  setHasSORA(hasCall()&&!(getName()=="main"));
   //setNumberOfMACBlocks(0);
 }
 

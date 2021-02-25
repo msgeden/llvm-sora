@@ -14,7 +14,8 @@
 #define LLVM_LIB_TARGET_X86_X86MACHINEFUNCTIONINFO_H
 
 #include "llvm/CodeGen/CallingConvLower.h"
-#include "llvm/CodeGen/MachineFunction.h"
+
+#include "llvm/CodeGen/MachineInstr.h"
 #include "llvm/Support/MachineValueType.h"
 
 namespace llvm {
@@ -185,6 +186,7 @@ public:
 
   bool hasWinAlloca() const { return HasWinAlloca; }
   void setHasWinAlloca(bool v) { HasWinAlloca = v; }
+
 };
 
 } // End llvm namespace
